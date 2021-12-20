@@ -55,9 +55,6 @@ function progressHandler(event) {
 function completeHandler(event) {
     _("status").innerHTML = event.target.responseText;
     returnAllBtnStyle();
-    setTimeout(function () {
-        window.location.href = "/file.php";
-    }, 1000);
 }
 
 function errorHandler(event) {
