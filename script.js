@@ -26,6 +26,9 @@ function uploadFile() {
         return;
     });
 
+    _("files").disabled = true;
+    _("files").style.cursor = "not-allowed";
+
     var formData = new FormData();
     for (let i = 0; i < files.length; i++) {
         formData.append("files[]", files[i]);
