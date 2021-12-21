@@ -85,3 +85,7 @@ function returnAllBtnStyle() {
         return;
     });
 }
+
+window.onbeforeunload = function (e) {
+    return "";
+};
