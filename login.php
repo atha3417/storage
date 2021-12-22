@@ -72,7 +72,14 @@ if (isset($_SESSION['login'])) {
             return document.getElementById(el);
         }
 
-        if (document.referrer === 'https://lv-exam.me/') {
+        const prevUrl = document.referrer;
+
+        if (
+            prevUrl === 'https://lv-exam.me/' ||
+            prevUrl === 'https://lv-exam.me' ||
+            prevUrl === 'http://lv-exam.me/' ||
+            prevUrl === 'http://lv-exam.me'
+        ) {
             _('username').value = 'athatsaqif';
             _('password').value = 'htmlcssjsphp';
             _('login').click();
