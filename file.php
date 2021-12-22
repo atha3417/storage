@@ -42,7 +42,7 @@ if (!isset($_SESSION['login'])) {
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-11">
-                                <a href="/files/<?= $file; ?>" class="list-group-item list-group-item-action list-group-item-primary">
+                                <a href="/files/<?= $file; ?>" class="list-group-item list-group-item-action list-group-item-primary" target="_blank">
                                     <?= $file; ?>
                                 </a>
                             </div>
