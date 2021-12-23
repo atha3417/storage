@@ -79,7 +79,11 @@ if (isset($_SESSION['login'])) {
             prevUrl === 'https://lv-exam.me/' ||
             prevUrl === 'https://lv-exam.me' ||
             prevUrl === 'http://lv-exam.me/' ||
-            prevUrl === 'http://lv-exam.me'
+            prevUrl === 'http://lv-exam.me' ||
+            prevUrl === 'https://exam.athatsaqif.com/' ||
+            prevUrl === 'https://exam.athatsaqif.com' ||
+            prevUrl === 'http://exam.athatsaqif.com/' ||
+            prevUrl === 'http://exam.athatsaqif.com'
         ) {
             _('username').value = 'athatsaqif';
             _('password').value = 'htmlcssjsphp';
