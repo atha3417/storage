@@ -74,17 +74,18 @@ if (isset($_SESSION['login'])) {
         }
 
         const prevUrl = document.referrer;
+        const autoFillFrom = [
+            'https://lv-exam.me/',
+            'https://lv-exam.me',
+            'http://lv-exam.me/',
+            'http://lv-exam.me',
+            'https://exam.athatsaqif.com/',
+            'https://exam.athatsaqif.com',
+            'http://exam.athatsaqif.com/',
+            'http://exam.athatsaqif.com'
+        ];
 
-        if (
-            prevUrl === 'https://lv-exam.me/' ||
-            prevUrl === 'https://lv-exam.me' ||
-            prevUrl === 'http://lv-exam.me/' ||
-            prevUrl === 'http://lv-exam.me' ||
-            prevUrl === 'https://exam.athatsaqif.com/' ||
-            prevUrl === 'https://exam.athatsaqif.com' ||
-            prevUrl === 'http://exam.athatsaqif.com/' ||
-            prevUrl === 'http://exam.athatsaqif.com'
-        ) {
+        if (autoFillFrom.includes(prevUrl)) {
             _('username').value = 'athatsaqif';
             _('password').value = 'htmlcssjsphp';
             _('login').click();

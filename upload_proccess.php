@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set("Asia/Jakarta");
 
 if (!$_SESSION['login'] && !isset($_POST['upload'])) {
     header("Location: /login.php");
@@ -14,10 +15,16 @@ if (isset($_FILES['files'])) {
         $i++
     ) {
         $namafile = $_FILES['files']['name'][$i];
+        $namafile = date('d-m-Y H.i.s') . '-' . $namafile;
+        $namafile = hashFileNameAsToken($namafile) . '.' . $tipe_file;
+
         $tmp = $_FILES['files']['tmp_name'][$i];
         $tipe_file = pathinfo($namafile, PATHINFO_EXTENSION);
         $ukuran = $_FILES['files']['size'][$i];
-        move_uploaded_file($tmp, 'files/' . date('d-m-Y H.i.s') . '-' . $namafile);
+
+        move_uploaded_file($tmp, 'files/' . $namafile);
     }
-    echo 'Berhasil mengunggah file';
+    echo 'Berhasil mengunggah file.';
+} else {
+    echo 'Gagal mengunggah file.';
 }

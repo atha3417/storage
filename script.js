@@ -1,12 +1,13 @@
 var uploadBtn = _("uploadBtn");
 var backBtn = _("backBtn");
+var formFile = _("files");
 
 function _(el) {
     return document.getElementById(el);
 }
 
 function uploadFile() {
-    var files = _("files").files;
+    var files = formFile.files;
     if (!files.length) {
         alert("Pilih file terlebih dahulu.");
         return;
@@ -26,8 +27,8 @@ function uploadFile() {
         return;
     });
 
-    _("files").disabled = true;
-    _("files").style.cursor = "not-allowed";
+    formFile.disabled = true;
+    formFile.style.cursor = "not-allowed";
 
     var formData = new FormData();
     for (let i = 0; i < files.length; i++) {
@@ -42,6 +43,8 @@ function uploadFile() {
     ajax.open("POST", "/upload_proccess.php");
     ajax.send(formData);
 
+    confirmBeforeUnload();
+
     function abortUpload() {
         ajax.abort();
         return;
@@ -49,31 +52,38 @@ function uploadFile() {
 }
 
 function progressHandler(event) {
-    _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
+    _("loaded_n_total").innerHTML = "Terunggah " + event.loaded + " bytes dari " + event.total;
     var percent = (event.loaded / event.total) * 100;
     _("progressBar").value = Math.round(percent);
-    _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
+    _("status").innerHTML = Math.round(percent) + "% terunggah... mohon tunggu.";
 }
 
 function completeHandler(event) {
-    _("status").innerHTML = event.target.responseText;
+    _("status").innerText = event.target.responseText;
     returnAllBtnStyle();
+    clearConfirmBeforeUnload();
 }
 
-function errorHandler(event) {
-    _("status").innerHTML = "Upload Failed";
+function errorHandler() {
+    _("status").innerHTML = "Gagal mengunggah file.";
     returnAllBtnStyle();
+    clearConfirmBeforeUnload();
 }
 
-function abortHandler(event) {
-    _("status").innerHTML = "Upload Aborted";
-    _("files").value = "";
+function abortHandler() {
+    _("status").innerHTML = "Unggahan dibatalkan.";
+    formFile.value = "";
     returnAllBtnStyle();
+    clearConfirmBeforeUnload();
 }
 
 function returnAllBtnStyle() {
     backBtn.href = "/file.php";
     backBtn.style.cursor = "pointer";
+
+    formFile.value = "";
+    formFile.disabled = false;
+    formFile.style.cursor = "pointer";
 
     uploadBtn.blur();
     uploadBtn.innerText = "Unggah";
@@ -86,6 +96,12 @@ function returnAllBtnStyle() {
     });
 }
 
-window.onbeforeunload = function (e) {
-    return "";
-};
+function confirmBeforeUnload() {
+    window.onbeforeunload = function (e) {
+        return "";
+    };
+}
+
+function clearConfirmBeforeUnload() {
+    window.onbeforeunload = null;
+}
