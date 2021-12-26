@@ -1,5 +1,8 @@
 <?php
+
 session_start();
+require_once __DIR__ . '/modules/db.php';
+
 if (!isset($_SESSION['login'])) {
     header("Location: /login.php");
 }
@@ -35,20 +38,20 @@ if (!isset($_SESSION['login'])) {
 
             <ul class="list-group">
                 <?php
-                $files = scandir('files');
-                unset($files[0]);
-                unset($files[1]);
+                prepare("SELECT * FROM files");
+                execute();
+                $files = fetch();
                 ?>
                 <?php foreach ($files as $file) : ?>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-11">
-                                <a href="/files/<?= $file; ?>" class="list-group-item list-group-item-action list-group-item-primary" target="_blank">
-                                    <?= $file; ?>
+                                <a href="/files/<?= $file['token']; ?>" class="list-group-item list-group-item-action list-group-item-primary" target="_blank">
+                                    <?= $file['name']; ?>
                                 </a>
                             </div>
                             <div class="col-1 text-center">
-                                <a href="/delete.php?name=<?= $file; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file ?>?')">
+                                <a href="/delete.php?token=<?= $file['token']; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file['name'] ?>?')">
                                     Hapus
                                 </a>
                             </div>
