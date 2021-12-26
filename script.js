@@ -43,10 +43,6 @@ function uploadFile() {
     ajax.open("POST", "/upload_proccess.php");
     ajax.send(formData);
 
-    window.onbeforeunload = function (e) {
-        return "";
-    };
-
     function abortUpload() {
         ajax.abort();
         return;
@@ -63,20 +59,17 @@ function progressHandler(event) {
 function completeHandler(event) {
     _("status").innerText = event.target.responseText;
     returnAllBtnStyle();
-    clearConfirmBeforeUnload();
 }
 
 function errorHandler() {
     _("status").innerHTML = "Gagal mengunggah file.";
     returnAllBtnStyle();
-    clearConfirmBeforeUnload();
 }
 
 function abortHandler() {
     _("status").innerHTML = "Unggahan dibatalkan.";
     formFile.value = "";
     returnAllBtnStyle();
-    clearConfirmBeforeUnload();
 }
 
 function returnAllBtnStyle() {
@@ -96,8 +89,4 @@ function returnAllBtnStyle() {
         uploadFile();
         return;
     });
-}
-
-function clearConfirmBeforeUnload() {
-    window.onbeforeunload = null;
 }
