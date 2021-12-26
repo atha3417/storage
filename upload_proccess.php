@@ -25,8 +25,8 @@ if (isset($_FILES['files'])) {
         $token = hashFileNameAsToken($namafile) . '.' . $tipe_file;
 
         move_uploaded_file($tmp, 'files/' . $token);
-        prepare("INSERT INTO files (name, token) VALUES (?, ?)", [$namafile, $token]);
-        execute();
+        prepare("INSERT INTO files (name, token) VALUES (?, ?)");
+        execute([$namafile, $token]);
     }
     echo 'Berhasil mengunggah file';
 } else {
