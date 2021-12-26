@@ -43,7 +43,9 @@ function uploadFile() {
     ajax.open("POST", "/upload_proccess.php");
     ajax.send(formData);
 
-    confirmBeforeUnload();
+    window.onbeforeunload = function (e) {
+        return "";
+    };
 
     function abortUpload() {
         ajax.abort();
@@ -94,12 +96,6 @@ function returnAllBtnStyle() {
         uploadFile();
         return;
     });
-}
-
-function confirmBeforeUnload() {
-    window.onbeforeunload = function (e) {
-        return "";
-    };
 }
 
 function clearConfirmBeforeUnload() {
