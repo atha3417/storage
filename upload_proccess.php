@@ -21,7 +21,7 @@ if (isset($_FILES['files'])) {
         $tmp = $_FILES['files']['tmp_name'][$i];
         $tipe_file = pathinfo($namafile, PATHINFO_EXTENSION);
         $ukuran = $_FILES['files']['size'][$i];
-        $namafile = date('d-m-Y H:i:s') . '-' . $namafile;
+        $namafile = date('d-m-Y H:i:s') . ' ' . $namafile;
         $token = hashFileNameAsToken($namafile) . '.' . $tipe_file;
 
         move_uploaded_file($tmp, 'files/' . $token);
