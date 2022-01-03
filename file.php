@@ -51,7 +51,7 @@ if (!isset($_SESSION['login'])) {
                                 </a>
                             </div>
                             <div class="col-1 text-center">
-                                <a href="/delete.php?token=<?= $file; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file ?>?')">
+                                <a href="/delete.php?name=<?= $file; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file ?>?')">
                                     Hapus
                                 </a>
                             </div>
