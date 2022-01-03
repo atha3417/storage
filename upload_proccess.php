@@ -19,7 +19,7 @@ if (isset($_FILES['files'])) {
         $tipe_file = pathinfo($namafile, PATHINFO_EXTENSION);
         $ukuran = $_FILES['files']['size'][$i];
         $namafile = date('d-m-Y H:i:s') . ' ' . $namafile;
-        move_uploaded_file($tmp, 'files/' . $namaFile);
+        move_uploaded_file($tmp, 'files/' . $namafile);
     }
     echo 'Berhasil mengunggah file';
 } else {
