@@ -1,8 +1,5 @@
 <?php
 session_start();
-require_once __DIR__ . '/modules/db.php';
-require_once __DIR__ . '/modules/functions.php';
-
 date_default_timezone_set("Asia/Jakarta");
 
 if (!$_SESSION['login'] && !isset($_POST['upload'])) {
@@ -22,11 +19,7 @@ if (isset($_FILES['files'])) {
         $tipe_file = pathinfo($namafile, PATHINFO_EXTENSION);
         $ukuran = $_FILES['files']['size'][$i];
         $namafile = date('d-m-Y H:i:s') . ' ' . $namafile;
-        $token = hashFileNameAsToken($namafile) . '.' . $tipe_file;
-
-        move_uploaded_file($tmp, 'files/' . $token);
-        prepare("INSERT INTO files (name, token) VALUES (?, ?)");
-        execute([$namafile, $token]);
+        move_uploaded_file($tmp, 'files/' . $namaFile);
     }
     echo 'Berhasil mengunggah file';
 } else {

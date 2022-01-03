@@ -38,20 +38,20 @@ if (!isset($_SESSION['login'])) {
 
             <ul class="list-group">
                 <?php
-                prepare("SELECT * FROM files");
-                execute();
-                $files = fetch();
+                $files = scandir("files");
+                unset($files[0]);
+                unset($files[1]);
                 ?>
                 <?php foreach ($files as $file) : ?>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-11">
-                                <a href="/files/<?= $file['token']; ?>" class="list-group-item list-group-item-action list-group-item-primary" target="_blank">
-                                    <?= $file['name']; ?>
+                                <a href="/files/<?= $file; ?>" class="list-group-item list-group-item-action list-group-item-primary" target="_blank">
+                                    <?= $file; ?>
                                 </a>
                             </div>
                             <div class="col-1 text-center">
-                                <a href="/delete.php?token=<?= $file['token']; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file['name'] ?>?')">
+                                <a href="/delete.php?token=<?= $file; ?>" class="btn btn-danger" onclick="return confirm('Apakah kamu yakin mau menghapus <?= $file ?>?')">
                                     Hapus
                                 </a>
                             </div>
