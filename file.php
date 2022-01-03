@@ -38,7 +38,9 @@ if (!isset($_SESSION['login'])) {
             <ul class="list-group">
                 <?php
                 $files = scandir("files");
-                unset($files[0], $_FILES[1], $_FILES[2]);
+                unset($files[0]);
+                unset($files[1]);
+                unset($files[2]);
                 ?>
                 <?php foreach ($files as $file) : ?>
                     <li class="list-group-item">
